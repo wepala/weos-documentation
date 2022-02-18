@@ -1,3 +1,8 @@
+---
+title: Contributing
+weight: 20
+---
+
 ## What Do I Need To Know To Help?
 
 If you are looking to help with WeOS, you can contribute a few ways, and not all of them require you to know how to code.

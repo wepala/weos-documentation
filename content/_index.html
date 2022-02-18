@@ -1,0 +1,40 @@
+---
+title: Home
+---
+
+{{< blocks/cover title="Welcome to WeOS" image_anchor="top" height="full" >}}
+    <div class="mx-auto">
+        <a class="btn btn-lg btn-primary mr-3 mb-4" href="{{< relref " /about" >}}">
+            Learn more<i class="fas fa-arrow-alt-circle-right ml-2"></i>
+        </a>
+        <a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://github.com/wepala/weos">
+            Download <i class="fab fa-github ml-2 "></i>
+        </a>
+        <p class="lead mt-5">Low-code, OpenAPI-based microservices made easy</p>
+        {{< blocks/link-down color="info" >}}
+    </div>
+{{< /blocks/cover >}}
+
+{{< blocks/lead color="primary" >}}
+WeOS is an open-source system for creating API microservices for mobile or web apps, SaaS, or the next big thing!
+{{< /blocks/lead >}}
+
+{{< blocks/section color="dark" >}}
+
+{{< blocks/feature title="Design first" >}}
+Design your API and model your data with OpenAPI.
+
+Let WeOS bring it to life.
+{{< /blocks/feature >}}
+
+{{< blocks/feature title="Low-code" >}}
+Write only the code necessary to implement your business logic.
+
+WeOS provides pre-built controllers and middleware to get you up and running fast.
+{{< /blocks/feature >}}
+
+{{< blocks/feature title="Deploy with ease" >}}
+Use a standalone executable written in Go. No container required.
+{{< /blocks/feature >}}
+
+{{< /blocks/section >}}
