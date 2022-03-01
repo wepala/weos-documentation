@@ -2,30 +2,28 @@
 title: Request flow
 ---
 
-TODO: Use mermaid.js for charts
-
 # WeOS Rest Endpoint Request Flow
-This shows what happens with an incoming request to an endpoint
+This shows what happens with an incoming request to an endpoint.
+
 ```mermaid
 flowchart LR
     Start --> runPreMiddleware[[Run Pre Middleware]] --> getRoute[[Get Route]] --> runMiddleware[[Run Middleware]] --> runController[[Run Controller]]-->End([End])
 ```
 
 ## Pre Middleware 
-We have standard middleware that we typically use 
+We have standard middleware that we typically use:
 - RequestID - Generate request id 
 - Recover - Return friendly error when there is a panic
 - ZapLogger - Switches to using Zap logger instead of echo logger 
 
 ## Get Route 
-Uses echo framework functionality. 
+Uses built-in echo framework functionality.
 
 ## Run Middleware
-Middleware are run in the order in which they are configured on the path. 
+Middleware are run in the order in which they are configured on the path.
 
 ### Context Middleware
-By default a Context Middleware is set which adds values in the request based on the parameters configured on that path
-in the OpenAPI spec.
+By default a Context Middleware is set which adds values in the request based on the parameters configured on that path in the OpenAPI spec.
 
 ```mermaid
 flowchart TD
@@ -37,7 +35,8 @@ flowchart TD
 ```
 
 ## Run Controller
-The controller that is run is either explicitly set using the `x-controller` extension or automatically configured. 
+The controller that is run is either explicitly set using the `x-controller` extension or automatically configured.
+
 ### Standard Create Controller
 ```mermaid
 flowchart TD

@@ -2,14 +2,12 @@
 title: Initialization
 ---
 
-TODO: Use mermaid.js for charts
-
 # API Startup Flow Chart
 
 ## Main entrypoint 
 
 The OpenAPI spec can be passed to the CLI via environment variable `WEOS_SCHEMA` or as a command line argument `schema`. 
-The value for the OpenAPI spec could be the contents of a valid spec or the filepath to the specification
+The value for the OpenAPI spec could be the contents of a valid spec or the filepath to the specification.
 
 ```mermaid
 flowchart TD
@@ -44,7 +42,7 @@ flowchart TD
 ```
 
 ##### Parse Schemas
-This is where the OpenAPI schemas are converted to GORM models 
+This is where the OpenAPI schemas are converted to GORM models.
 
 ```mermaid
 flowchart TD
@@ -60,8 +58,7 @@ flowchart TD
 ```
 
 ##### Process WeOS Config
-The `x-weos-config` contains the database configuration that is used to instantiate a database connection. It also contains
-REST middleware configuration 
+The `x-weos-config` contains the database configuration that is used to instantiate a database connection. It also contains REST middleware configuration.
 
 ```mermaid
 flowchart TD
@@ -73,16 +70,15 @@ flowchart TD
 ```
 
 ###### Initialize Service
-Each API extends a base `Service` that WeOS provides. When a service is instantiated the db connections are setup using 
-`database` configuration in the `x-weos-config`
+Each API extends a base `Service` that WeOS provides. When a service is instantiated the DB connections are setup using `database` configuration in the `x-weos-config`.
 
 ```mermaid
 flowchart LR
     Start --> intantiateGorm[Intantiate Gorm] --> setupHTTPClient[Setup HTTPClient] --> setupEventStream[Setup Event Repository] --> BaseService[/Base Service/] --> End([End]) 
 ```
 
-##### Setup Paths 
-Each path in the OpenAPI spec is processed and the relevant middleware, controllers are associated
+##### Setup Paths
+Each path in the OpenAPI spec is processed and the relevant middleware and controllers are associated.
 
 ```mermaid
 flowchart TD
@@ -101,6 +97,4 @@ flowchart TD
     setController-->hasController{Has\nController}
     hasController-->|Yes|configureEchoRoute[Configure Echo Route]-->configureCORS[Configure CORS]-->echoInstance[/echo instance/]-->End([End])
     hasController-->|No|logError[Log Error]-->configureCORS
-    
-    
 ```
