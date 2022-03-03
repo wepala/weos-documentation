@@ -197,44 +197,44 @@ The DSL for lists filters have three parts:
   2. Operator - the operator to use for the filter (eq, ne, gt, lt, in, like)
   3. Value (an array or possible values. Most operators will be for scalar values
 
-  """
-    /blogs:
-      get:
-        operationId: Get Blogs
-        summary: Get List of Blogs
-        parameters:
-          - in: query
-            name: filters
+```
+/blogs:
+  get:
+    operationId: Get Blogs
+    summary: Get List of Blogs
+    parameters:
+      - in: query
+        name: filters
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              operator:
+                type: string
+              value:
+                type: array
+                items:
+                  type: string
+    responses:
+      200:
+        description: List of blogs
+        content:
+          application/json:
             schema:
-              type: array
-              items:
-                type: object
-                properties:
-                  field:
-                    type: string
-                  operator:
-                    type: string
-                  value:
-                    type: array
-                    items:
-                      type: string
-        responses:
-          200:
-            description: List of blogs
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    total:
-                      type: integer
-                    page:
-                      type: integer
-                    items:
-                      type: array
-                      items:
-                        $ref: "#/components/schemas/Blog"
-    """
+              type: object
+              properties:
+                total:
+                  type: integer
+                page:
+                  type: integer
+                items:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Blog"
+```
 
 **When** the "OpenAPI 3.0" specification is parsed  
 **Then** a "GET" route should be added to the api  
@@ -293,38 +293,35 @@ Developers can specify which fields can be filtered and what filter options are 
 If filters are specified then it should be in the expected for the controller to be associated. If it's invalid it
     should show a warning (otherwise a controller that knows how to parse the filters should be explicitly set).
 
-  """
-    /blogs:
-      get:
-        operationId: Get Blogs
-        summary: Get List of Blogs
-        x-context:
-          filters:
-            - adadsfad
-            - adfadsf
-          page: 1
-          limit: 10
-        responses:
-          200:
-            description: List of blogs
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    total:
-                      type: integer
-                    page:
-                      type: integer
+```
+  /blogs:
+    get:
+      operationId: Get Blogs
+      summary: Get List of Blogs
+      x-context:
+        filters:
+          - adadsfad
+          - adfadsf
+        page: 1
+        limit: 10
+      responses:
+        200:
+          description: List of blogs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+                  items:
+                    type: array
                     items:
-                      type: array
-                      items:
-                        $ref: "#/components/schemas/Blog"
-    """
+                      $ref: "#/components/schemas/Blog"
+```
 
 **When** the "OpenAPI 3.0" specification is parsed  
 **Then** a "GET" route should be added to the api  
 **And** a "List" middleware should be added to the route.  
-
-### Sort a list of items
-

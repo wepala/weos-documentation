@@ -112,13 +112,3 @@ paths:
 **And** "Sojourner" enters "Some Description" in the "publishedDate" field  
 **When** the "Blog" is submitted  
 **Then** an error should be returned.
-
-TODO: Describe creating item with invalid type
-
-### Create an item that violates uniqueness requirement
-
-TODO: Describe creating non-unique item
-
-### Create an item using an endpoint that does not define the response
-
-TODO: Describe creating item using endpoint with undefined response
