@@ -20,10 +20,6 @@ x-weos-config:
     - title: event
       driver: sqlite3
       database: test.db
-  databases:
-    - title: default
-      driver: sqlite3
-      database: test.db
   database:
     driver: sqlite3
     database: test.db
