@@ -1,11 +1,14 @@
 ---
 title: Setting up routes
+weight: 30
+description: Set up API routes to expose endpoints.
 ---
 
 API routes are what applications use to access data and execute functionality. The paths you specify in the [OpenAPI
-specification](https://swagger.io/docs/specification/paths-and-operations/) will become endpoints to which your
-application can send requests. Each path can have multiple operations that you can configure separately or you can
-configure a group of operations
+specification][paths] will become endpoints to which your
+application can send requests. Each path can have multiple operations that you can configure separately or you can configure a group of operations.
+
+[paths]: https://swagger.io/docs/specification/paths-and-operations/
 
 ### Parameters
 You can define route parameters using OpenAPI's parameters specification. Each parameter defined is used to validate
@@ -66,6 +69,4 @@ are available for:
 | Update          | Edit an item                       |                         | identifier (note this could be multiple parts) |                                                                                                                               |
 
 Standard Controllers are automatically associated with an endpoint if a controller is not explicitly specified and the
-path specification meets the conditions for one of the Standard Controllers. [Learn More About Controllers](/docs/concepts/controllers)
-
-### Route Extensions
+path specification meets the conditions for one of the Standard Controllers. [Learn More About Controllers](/docs/concepts/controllers).

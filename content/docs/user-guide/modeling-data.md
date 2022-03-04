@@ -1,5 +1,7 @@
 ---
 title: Modeling data
+weight: 20
+description: Model data with OpenAPI schemas.
 ---
 
 Data is modeled using [OpenAPI schemas][schemas] directly in your OpenAPI spec file.

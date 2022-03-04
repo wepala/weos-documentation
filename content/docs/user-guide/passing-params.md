@@ -1,5 +1,7 @@
 ---
 title: Passing parameters to endpoints
+weight: 40
+description: Pass parameters in requests to endpoints.
 ---
 
 The content service allows developers to declare parameters and bind them to content type properties through a request
@@ -17,8 +19,7 @@ Content service will automatically bind parameters to the content type's propert
 (assuming they are named the same). If there is an endpoint for our Blog content type and there is an API parameter "id"
 defined, then the content service will automatically map the parameter **id** to `Blog.id` in the context.
 
-If the parameter is not named the same as the property on the content type, then the `x-property` attribute can link the
-parameter to a content type property.
+If the parameter is not named the same as the property on the content type, then the `x-property` attribute can link the parameter to a content type property.
 
 ```yaml
 /blogs/{someID}:
