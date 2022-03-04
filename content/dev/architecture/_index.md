@@ -1,4 +1,5 @@
 ---
 title: WeOS architecture
-weight: 10
+weight: 20
+description: The architecture and data-flow of a WeOS process.
 ---

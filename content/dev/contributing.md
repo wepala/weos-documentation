@@ -1,21 +1,29 @@
 ---
 title: Contributing
-weight: 20
+weight: 10
+description: How to participate in development.
 ---
 
 ## What Do I Need To Know To Help?
 
 If you are looking to help with WeOS, you can contribute a few ways, and not all of them require you to know how to code.
 
-If you have a coding background, you can help with WeOS core (you will need to be familiar with Golang and set up docker for the testing toolchain). You can also help create example APIs (familiarity with the OpenAPI specification). If you are a UI developer, you can help work on micro frontends and components that use the APIs that other developers can use in their apps.
+If you have a coding background, you can help with WeOS core (you will need to be familiar with Golang and set up docker for the testing toolchain).
+See the [architecture documentation][arch] to familiarize yourself with WeOS's
+architecture.
+
+You can also help create example APIs (familiarity with the OpenAPI specification).
+If you are a UI developer, you can help work on micro frontends and components that use the APIs that other developers can use in their apps.
 
 If you're not into coding (yet :) ), you can also help us out by helping improve our documentation. You can also share with us how we can improve the user experience of our applications or help spread the word about what we're trying to accomplish with WeOS.
+
+[arch]: /dev/architecture
 
 ## How Do I Make A Contribution?
 
 Decided that you want to help with code, but you've ever made an open-source contribution before? No worries, we'll help get you started
 1. Find an issue that you are interested in contributing (https://github.com/wepala/weos/issues). If one doesn't already exist for what you have in mind, go ahead and create one!
-2. Fork the repository to your account so that the project would be in your (or your organization's) account e.g. https://github.com/<your-account>/weos
+2. Fork the repository to your account so that the project would be in your (or your organization's) account e.g. https://github.com/*your-account*/weos
 3. Clone the repository to your local machine using git clone
 4. Create a branch for your update
 5. Make your changes
@@ -28,4 +36,6 @@ Decided that you want to help with code, but you've ever made an open-source con
 
 ## Where Can I Go For Help?
 
-If you need help, you can ask questions on Discord or reach us on GitHub.
+If you need help, you can ask questions on Discord or reach us on [GitHub][github].
+
+[github]: https://github.com/wepala/weos/issues

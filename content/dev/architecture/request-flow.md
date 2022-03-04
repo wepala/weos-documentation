@@ -1,8 +1,9 @@
 ---
 title: Request flow
+weight: 20
+description: The process of handling a request to an endpoint.
 ---
 
-# WeOS Rest Endpoint Request Flow
 This shows what happens with an incoming request to an endpoint.
 
 ```mermaid

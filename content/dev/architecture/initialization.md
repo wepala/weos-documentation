@@ -1,8 +1,8 @@
 ---
 title: Initialization
+weight: 10
+description: The process of setting up WeOS from an OpenAPI spec.
 ---
-
-# API Startup Flow Chart
 
 ## Main entrypoint 
 
