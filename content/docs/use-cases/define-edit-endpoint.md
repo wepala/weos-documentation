@@ -1,5 +1,6 @@
 ---
 title: Edit content endpoints
+description: Update content of a specific type via an endpoint.
 ---
 
 As developer you can create an endpoint that should be used to edit content of a specific type. The HTTP method and the

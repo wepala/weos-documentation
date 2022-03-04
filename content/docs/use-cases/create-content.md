@@ -1,5 +1,6 @@
 ---
 title: Create content
+description: Create basic items via your API.
 ---
 
 ## Background

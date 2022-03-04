@@ -1,5 +1,6 @@
 ---
 title: Model API content types
+description: Validate content type properties and set up relationships.
 ---
 
 As a developer you can define content types for your API. Content Types have properties that can be formatted and

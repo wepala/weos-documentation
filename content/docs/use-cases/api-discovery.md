@@ -1,8 +1,9 @@
 ---
 title: Get API Details
+description: Get API details via Swagger UI or json.
 ---
 
-The OpenAPI details can be made available via the API
+The OpenAPI details can be made available via the API.
 
 ## Background
 

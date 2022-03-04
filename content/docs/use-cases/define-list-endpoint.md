@@ -1,5 +1,6 @@
 ---
 title: Setup List endpoint
+description: Enumerate content of a specific type via an endpoint.
 ---
 
 ## Background
