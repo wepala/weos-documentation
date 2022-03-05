@@ -1,5 +1,6 @@
 ---
 title: Middleware
+description: Reusable code for handling cross-cutting concerns.
 ---
 
 Middleware is reusable code that can be associated with a route.

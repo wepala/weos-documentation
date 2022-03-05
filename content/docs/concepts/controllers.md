@@ -1,5 +1,6 @@
 ---
 title: Controllers
+description: Control handling of endpoint requests.
 ---
 
 [projections]: /docs/concepts/projections
