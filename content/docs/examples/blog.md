@@ -1,5 +1,6 @@
 ---
 title: Blog OpenAPI spec
+description: Example OpenAPI spec for a blog API.
 ---
 
 ```yaml
