@@ -1,6 +1,7 @@
 ---
 title: User guide
 weight: 20
+description: Learn the foundational usage patterns.
 ---
 
 WeOS takes a design-first approach using [OpenAPI specifications][openapi]. WeOS uses the OpenAPI specification to set up routes

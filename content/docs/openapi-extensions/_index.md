@@ -1,6 +1,7 @@
 ---
 title: OpenAPI extensions
-weight: 30
+weight: 40
+description: Learn about WeOS-specific OpenAPI extensions.
 ---
 
 WeOS provides [OpenAPI extensions][extensions] to describe its extra functionality.
