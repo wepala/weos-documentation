@@ -160,7 +160,7 @@ func main() {
 	if err != nil {
 		log.Fatalln("error loading api config", err)
 	}
-   //register middleware
+   //register projection
 	api.RegisterProjection("Default",CustomProjection)
    //initialize API so that standard middleware,controller,projections etc are registered
 	err = api.Initialize(ctxt)
