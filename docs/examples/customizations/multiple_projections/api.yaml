@@ -1,0 +1,73 @@
+openapi: 3.0.3
+info:
+  title: Todo Service
+  description: Some Todo Service
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8681'
+x-weos-config:
+  database:
+    driver: sqlite3
+    database: weprojects.db
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+          enum:
+            - Story
+            - Task
+        dueDate:
+          type: string
+          format: date-time
+paths:
+  /health:
+    get:
+      responses:
+        200:
+          content:
+            text/html:
+              example: |
+                <html><head><title>Health Page</title></head><body>Health Check</body></html>
+  /tasks:
+    get:
+      operationId: getTasks
+      x-projections:
+        - Custom
+        - Default
+      responses:
+        200:
+          description: List of tasks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Task"
+    post:
+      operationId: createTask
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Task"
+      responses:
+        201:
+          description: Created task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"

@@ -53,32 +53,9 @@ func CustomMiddleware(api *RESTAPI, projection projections.Projection, commandDi
 
 To see the full list of information automatically available in the context see the documentation of the context
 
-Once the middleware is defined it must be registered with the dependency container
+Once the middleware is defined it must be registered with the dependency container. 
 
 ```go
-package main
-
-import (
-	controllers "github.com/wepala/weos/controllers/rest"
-	projections "github.com/wepala/weos/projections"
-	model "github.com/wepala/weos/model"
-	"github.com/getkin/kin-openapi/openapi3"
-	"github.com/labstack/echo/v4"
-	"golang.org/x/net/context"
-	"log"
-)
-
-func CustomMiddleware(api *controllers.RESTAPI, projection projections.Projection, commandDispatcher model.CommandDispatcher, eventSource model.EventRepository, entityFactory model.EntityFactory, path *openapi3.PathItem, operation *openapi3.Operation) echo.MiddlewareFunc {
-	//TODO code you want to execute once can go here e.g. parsing information from OpenAPI spec
-	return func(next echo.HandlerFunc) echo.HandlerFunc {
-		return func(ctxt echo.Context) error {
-			//TODO code that you want to execute per request goes here. 
-			//variables define in the OpenAPI spec will be available in the request context ctxt.Request().Context()
-			return nil
-		}
-	}
-}
-
 func main() {
 	ctxt := context.Background()
 	//instantiate weos with a reference to the OpenAPI specification
@@ -99,71 +76,126 @@ func main() {
 
 ```
 
-With the middleware registered you can now reference it in the OpenAPI spec
-
+With the middleware registered you can now reference it in the OpenAPI spec e.g. 
 ```yaml
-openapi: 3.0.3
-info:
-  title: Todo Service
-  description: Some Todo Service
-  version: 1.0.0
-servers:
-  - url: 'http://localhost:8681'
-x-weos-config:
-  database:
-    driver: sqlite3
-    database: weprojects.db
-components:
-  schemas:
-    Task:
-      type: object
-      properties:
-        title:
-          type: string
-        description:
-          type: string
-        type:
-          type: string
-          enum:
-            - Story
-            - Task
-        dueDate:
-          type: string
-          format: date-time
-paths:
-  /tasks:
+/tasks:
     get:
       operationId: getTasks
       x-middleware:
         - Custom
-      responses:
-        200:
-          description: List of tasks
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  total:
-                    type: integer
-                  page:
-                    type: integer
-                  items:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Task"
-    post:
-      operationId: createTask
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Task"
-      responses:
-        201:
-          description: Created task
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Task"
 ```
+[Complete Example](../examples/customizations/custom_middleware)
+
+
+## Customizing Projections 
+
+WeOS provides a default projection "Default" that supports a few databases (sqlite, Postgresql, Mysql, MariaDB). There are
+a few reasons for creating custom projections including:
+
+1. Using an unsupported database 
+2. Using events to generate data that should be re-created whenever the events are played (e.g. using events to generate QRcode images)
+
+In order to create your own custom projection you must create a struct that implements `weos.Projection` 
+
+```go
+//CustomProjection example of a custom projection
+type CustomProjection struct {
+}
+
+func (c *CustomProjection) Migrate(ctx context.Context, builders map[string]dynamicstruct.Builder, deletedFields map[string][]string) error {
+	return nil
+}
+
+func (c *CustomProjection) GetEventHandler() model.EventHandler {
+	return func(ctx context.Context, event model.Event) error {
+        switch event.Type {
+        default:
+            println("event handler hit")
+        }
+		return nil
+	}
+}
+
+func (c *CustomProjection) GetContentEntity(ctx context.Context, entityFactory model.EntityFactory, weosID string) (*model.ContentEntity, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (c *CustomProjection) GetByKey(ctxt context.Context, entityFactory model.EntityFactory, identifiers map[string]interface{}) (map[string]interface{}, error) {
+	entity := make(map[string]interface{})
+	entity["title"] = "Foo"
+	entity["description"] = "Bar"
+	return entity, nil
+}
+
+func (c *CustomProjection) GetByEntityID(ctxt context.Context, entityFactory model.EntityFactory, id string) (map[string]interface{}, error) {
+	entity := make(map[string]interface{})
+	entity["title"] = "Foo"
+	entity["description"] = "Bar"
+	return entity, nil
+}
+
+func (c *CustomProjection) GetContentEntities(ctx context.Context, entityFactory model.EntityFactory, page int, limit int, query string, sortOptions map[string]string, filterOptions map[string]interface{}) ([]map[string]interface{}, int64, error) {
+	entity := make(map[string]interface{})
+	entity["title"] = "Foo"
+	entity["description"] = "Bar"
+	return []map[string]interface{}{entity}, 1, nil
+}
+
+func (c *CustomProjection) GetByProperties(ctxt context.Context, entityFactory model.EntityFactory, identifiers map[string]interface{}) ([]map[string]interface{}, error) {
+	//TODO implement me
+	panic("implement me")
+}
+```
+!!! Tip
+    The event handler typically has a switch that handles different event types
+
+To make the projection accessible via the open api spec it needs to be registered on the dependency container
+
+```go
+func main() {
+	ctxt := context.Background()
+	//instantiate weos with a reference to the OpenAPI specification
+	api, err := controllers.New("api.yaml")
+	if err != nil {
+		log.Fatalln("error loading api config", err)
+	}
+   //register middleware
+	api.RegisterProjection("Default",CustomProjection)
+   //initialize API so that standard middleware,controller,projections etc are registered
+	err = api.Initialize(ctxt)
+	if err != nil {
+		log.Fatalln("error initializing api", err)
+	}
+	//start API 
+	controllers.Serve("8681", api)
+}
+
+```
+
+!!! Tip
+    Projection event handlers should be done in an idempotent way to accommodate replaying of events during a system recovery
+
+### Default projection 
+The default projection can be replaced by registering the custom projection as the `Default` projection in the container
+```go
+//register middleware
+api.RegisterProjection("Default",CustomProjection)
+```
+
+### Adding Multiple Projections
+Multiple projections can be associated with an operation by using the `x-projections` extension. 
+```yaml
+/tasks:
+    get:
+      operationId: getTasks
+      x-projections:
+        - Custom
+        - Default
+```
+
+The order of the projections matters, especially for endpoints that return data from the projection. In the case there are 
+multiple projections, WeOS will loop through each projection until it gets non nil result. If there really was no result
+WeOS would have made a call to each configured projection. 
+
+[Complete Example](../examples/customizations/multiple_projections)
