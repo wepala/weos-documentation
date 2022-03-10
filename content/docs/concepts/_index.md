@@ -4,21 +4,20 @@ weight: 30
 description: Understand core concepts.
 ---
 
-When WeOS receives a request to an endpoint, it first runs any
-pre-[middleware][middleware]. It then gets the route specified in your OpenAPI spec, followed by running any additional [middleware][middleware]. From here,
-the associated [controller][controllers] takes over, which executes the
-[command][commands] to handle the request type. A [projection][projections] is created
-and WeOS responds by returning relevant data.
+WeOS brings together common software development concepts including:
 
-```mermaid
-flowchart TD
-request[/Request/] --> preMiddleware[Run pre-middleware] --> getRoute[Get route] -->
-middleware[Run middleware] --> controller[Run controller] -->
-command[Execute command] --> projection[Create projection] -->
-respond([Return response])
-```
+1. Domain Driven Design - DDD
+2. Command Query Responsibility Segregation - CQRS
+3. Event Sourcing
 
-[middleware]: /docs/concepts/middleware
-[controllers]: /docs/concepts/controllers
-[commands]: /docs/concepts/commands
-[projections]: /docs/concepts/projections
+WeOS applications and apis help empower the following system architecture
+
+1. Microservices
+3. Cloud Native Applications
+4. Monoliths
+
+The team behind the project utilize the following concepts and frameworks 
+
+1. Test Driven Development - TDD 
+2. Behavior Driven Development - BDD 
+3. Agile Development Using Scrum 

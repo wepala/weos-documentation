@@ -7,9 +7,10 @@ description: Control handling of endpoint requests.
 
 Controllers map requests to models as well as retrieve information through projections. WeOS provides standard controllers for everyday actions, e.g., Create, Read, Update, Delete (CRUD).
 
+## Standard Controllers
 WeOS automatically binds controllers to endpoints that don't have one already. The controller is automatically attached based on the HTTP method, request body, and response info.
 
-## Create
+### Create
 The Create controller will create an item of the content type associated with the controller's endpoint.
 
 Example OpenAPI usage:
@@ -32,12 +33,12 @@ paths:
               $ref: "#/components/schemas/Post"
 ```
 
-## Read
+### Read
 There are two controllers for reading data from WeOS.
 - **Get**: Get a single item
 - **List**: Get a collection of items
 
-### Get
+#### Get
 The Get controller retrieves an item using the identifier of the associated content
 type. The developer defines an endpoint with the identifier declared as a parameter to
 use the Get controller. The Get controller retrieves the identifier from the request
@@ -64,7 +65,7 @@ paths:
                 $ref: "#/components/schemas/Post"
 ```
 
-### List
+#### List
 The List controller returns a paginated collection of items based on filters and sorts. The controller uses the filters
 declared in the context to retrieve information using a [projection][projections].
 
@@ -100,7 +101,7 @@ paths:
                       $ref: "#/components/schemas/Post"
 ```
 
-## Update
+### Update
 The Update controller will update an item using the identifier of the associated
 content type.
 
@@ -130,7 +131,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Post"
 ```
-## Delete
+### Delete
 The Delete controller will delete an item using the identifier of the associated
 content type.
 
