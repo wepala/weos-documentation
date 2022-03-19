@@ -60,6 +60,11 @@ a complete list of property types and formats.
 | Number    | Floating point Number                             | number            |           |               |
 | Boolean   | true or false only. Truthy values are not allowed | boolean           |           |               |
 | String    | string                                            | string            |           |               |
+| bcrypt    | Bcrypt hash                                       | string            | bcrypt    |               |
+| sha3-256  | Sha3-256 hash                                     | string            | sha3-256  |               |
+| sha3-512  | Sha3-152 hash                                     | string            | sha3-512  |               |
+| sha256    | Sha 256 hash                                      | string            | sha3-256  |               |
+| base64    | base64 encoded value hash                         | string            | base64    |               |
 | Date Time |                                                   | string            | date-time |               |
 | Array     |                                                   | array             |           |               |
 | Object    |                                                   |                   |           |               |

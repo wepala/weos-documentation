@@ -9,6 +9,7 @@ WeOS brings together common software development concepts including:
 1. Domain Driven Design - DDD
 2. Command Query Responsibility Segregation - CQRS
 3. Event Sourcing
+4. Inversion of Control - IoC
 
 WeOS applications and apis help empower the following system architecture
 
